@@ -1,2 +1,10 @@
 # 180-DC-ML_assignment-RohithKallurayaK
-180DC assignment by Rohith Kalluraya K
+
+## REPORT FOR CHALLENGE_1
+The challenge_1 uses a two-stage deep learning pipeline: a denoising autoencoder followed by a simple CNN classifier. The reasoning is that with this method the classification of noisy images is better achieved. Noisy data can make it difficult for a CNN to learn class-discriminative features, and thus the model may have poor generalization. With the introduction of a specific denoising stage, the system guarantees that the cleaner, structured inputs are provided to the classifier.
+
+The autoencoder follows supervised learning, trained on paired noisy and clean images. The encoder gradually decreases image dimensionality using convolutional layers, and the decoder maps back into the original image form. The network is trained using mean squared error (MSE) loss, which brings about a contrast between the actual clean image and the one we made from our model. Evaluations are also done with metrics like PSNR and SSIM, that measure image quality in excess of raw pixel difference. That prevents the model from denoising superficially but also maintaining significant structural information.
+
+The second phase, a CNN classifier, learns to classify the denoised images into fixed classes. It employs convolutional blocks for feature extraction and fully connected layers for classification. Data augmentation techniques like random flips, rotations, and color jittering are used to fight overfitting and enhance robustness. For class imbalance, a weighted random sampler is utilized to provide equitable training of minority classes. Validation set is made and training is conducted with cross entropy loss and Adam optimizer with learning rate scheduling, and the model is chosen based on best validation accuracy. A confusion matrix is then produced to see class wise performance.
+
+Another possible solution would be to train one CNN end to end on noisy images. In summary, this pipeline meets the modularity-performance tradeoff: the autoencoder is optimized for data cleaning and the CNN for classification. .
